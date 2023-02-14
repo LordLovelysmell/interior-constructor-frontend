@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const fs = require("fs");
 const webpack = require("webpack");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const appDirectory = fs.realpathSync(process.cwd());
 
@@ -39,10 +40,11 @@ module.exports = () => {
     },
 
     plugins: [
+      new CleanWebpackPlugin(),
       new HTMLWebpackPlugin({
         inject: true,
         template: path.resolve(appDirectory, "public/index.html"),
-    }),
+      }),
       new webpack.DefinePlugin(envKeysValues),
     ],
 
@@ -69,6 +71,11 @@ module.exports = () => {
             "css-loader",
             "sass-loader",
           ],
+        },
+        {
+          test: /\.(glsl|vs|fs)$/,
+          loader: "ts-shader-loader",
+          exclude: /node_modules/,
         },
         {
           test: /\.(png|jpg|gif|env|glb|gltf|stl)$/i,

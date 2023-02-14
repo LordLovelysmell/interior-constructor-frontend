@@ -14,9 +14,6 @@ import cubeMesh from '../../../assets/models/cube.glb';
 
 import "./BasicScene.scss";
 
-
-let box: Mesh;
-
 const onSceneReady = async (scene: Scene) => {
   const camera = new UniversalCamera("camera", new Vector3(0, 5, -10), scene);
   camera.setTarget(Vector3.Zero());
@@ -48,8 +45,8 @@ const onSceneReady = async (scene: Scene) => {
     }
   }
 
-  const _squaredWalls = await SceneLoader.ImportMeshAsync('', './models/', 'cube.glb', scene);
-  // const _squaredWalls = await SceneLoader.ImportMeshAsync('', '', cubeMesh, scene, undefined, '.glb');
+  // const _squaredWalls = await SceneLoader.ImportMeshAsync('', './models/', 'cube.glb', scene);
+  const _squaredWalls = await SceneLoader.ImportMeshAsync('', '', cubeMesh, scene, undefined, '.glb');
 
   scene.onPointerDown = function (evt, { pickedMesh }) {
     if (pickedMesh && pickedMesh.metadata && pickedMesh.metadata.name == 'tile') {
@@ -70,18 +67,6 @@ const onSceneReady = async (scene: Scene) => {
   scene.debugLayer.show();
 };
 
-/**
- * Will run on every frame render.  We are spinning the box on y-axis.
- */
-const onRender = (scene: Scene) => {
-  if (box !== undefined) {
-    const deltaTimeInMillis = scene.getEngine().getDeltaTime();
-
-    const rpm = 10;
-    box.rotation.y += (rpm / 60) * Math.PI * 2 * (deltaTimeInMillis / 1000);
-  }
-};
-
 export default () => (
-    <SceneComponent antialias onSceneReady={onSceneReady} onRender={onRender} id="my-canvas" />
+    <SceneComponent antialias onSceneReady={onSceneReady} id="my-canvas" />
 );
