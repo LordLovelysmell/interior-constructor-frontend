@@ -8,12 +8,12 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const appDirectory = fs.realpathSync(process.cwd());
 
 module.exports = () => {
-  const env = dotenv.config().parsed;
+  // const env = dotenv.config().parsed;
 
-  const envKeysValues = Object.keys(env).reduce((acc, current) => {
-    acc[`process.env.${current}`] = JSON.stringify(env[current]);
-    return acc;
-  }, {});
+  // const envKeysValues = Object.keys(env).reduce((acc, current) => {
+  //   acc[`process.env.${current}`] = JSON.stringify(env[current]);
+  //   return acc;
+  // }, {});
 
   return {
     entry: path.resolve(appDirectory, "src/index.tsx"),
@@ -45,7 +45,7 @@ module.exports = () => {
         inject: true,
         template: path.resolve(appDirectory, "public/index.html"),
       }),
-      new webpack.DefinePlugin(envKeysValues),
+      // new webpack.DefinePlugin(envKeysValues),
     ],
 
     module: {
