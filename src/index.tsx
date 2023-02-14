@@ -19,14 +19,14 @@ root.render(
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route path="/sign-up" element={<Auth />} />
-          <Route path="/sign-in" element={<SignIn />} />
+          {/* <Route path="/sign-up" element={<Auth />} /> */}
+          {/* <Route path="/sign-in" element={<SignIn />} /> */}
           <Route path="/dashboard" element={
-            <ProtectedRoute>
+            // <ProtectedRoute>
               <Dashboard />
-            </ProtectedRoute>
+            // </ProtectedRoute>
           } />
-          <Route path="*" element={<Auth />} />
+          <Route path="*" element={<Dashboard />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
